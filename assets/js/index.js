@@ -1,1 +1,3 @@
-console.log("Hello");
+import render from "./render.js";
+
+render();
