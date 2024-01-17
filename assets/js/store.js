@@ -18,4 +18,20 @@ const store = {
   ] 
 };
 
-export default store;
+const storeHandler = {
+  get(target, property) {
+    console.log("Oh Your are trying to get data", property);
+    return target[property];
+  },
+  set(target, property, value) {
+    console.log(target, property, value);
+    console.log("Oh Your are trying to set data", property);
+    target[property] = value;
+    return true;
+  }
+}
+
+const storeProxy = new Proxy(store, storeHandler);
+
+// export default store;
+export default storeProxy;
