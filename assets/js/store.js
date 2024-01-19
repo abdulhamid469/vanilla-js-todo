@@ -25,8 +25,11 @@ const storeHandler = {
   },
   set(target, property, value) {
     console.log(target, property, value);
-    console.log("Oh Your are trying to set data", property);
+    // console.log("Oh Your are trying to set data", property);
     target[property] = value;
+    if(property == "todos") {
+      window.dispatchEvent(new Event("todosChange"));
+    }
     return true;
   }
 }
