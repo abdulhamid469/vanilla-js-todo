@@ -36,5 +36,10 @@ const storeHandler = {
 
 const storeProxy = new Proxy(store, storeHandler);
 
+function addTodo(newTodo) {
+ storeProxy.todos = [...storeProxy.todos, newTodo]; 
+}
+
+export { addTodo };
 // export default store;
 export default storeProxy;
