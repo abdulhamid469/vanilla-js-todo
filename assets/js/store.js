@@ -3,33 +3,21 @@ const store = {
     {
         id: "1",
         title: "Task One",
-        complated: false
-    },
-    {
-        id: "2",
-        title: "Task Two",
-        complated: true
-    },
-    {
-        id: "3",
-        title: "Task Three",
-        complated: true
+        completed: false
     }
   ] 
 };
 
 const storeHandler = {
   get(target, property) {
-    console.log("Oh Your are trying to get data", property);
     return target[property];
   },
   set(target, property, value) {
-    console.log(target, property, value);
-    // console.log("Oh Your are trying to set data", property);
     target[property] = value;
     if(property == "todos") {
       window.dispatchEvent(new Event("todosChange"));
     }
+    localStorage.setItem("store", JSON.stringify(store));
     return true;
   }
 }
@@ -48,8 +36,19 @@ function deleteTodo(id) {
 
 // Check TODO for complete.
 
+function toggleCompleted(id, completed) {
+storeProxy.todos = storeProxy.todos.map( todo => {
+  if(todo.id === id) {
+    return { 
+      ...todo, 
+      completed: completed 
+    }
+  } else {
+    return todo;
+  }
+})
+}
 
-
-export { addTodo, deleteTodo };
+export { addTodo, deleteTodo, toggleCompleted };
 // export default store;
 export default storeProxy;
