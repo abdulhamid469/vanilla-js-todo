@@ -36,10 +36,20 @@ const storeHandler = {
 
 const storeProxy = new Proxy(store, storeHandler);
 
+// Adding TODO
 function addTodo(newTodo) {
  storeProxy.todos = [...storeProxy.todos, newTodo]; 
 }
 
-export { addTodo };
+// Deleting TODO
+function deleteTodo(id) {
+  storeProxy.todos = storeProxy.todos.filter(todo => todo.id !== id);
+}
+
+// Check TODO for complete.
+
+
+
+export { addTodo, deleteTodo };
 // export default store;
 export default storeProxy;
